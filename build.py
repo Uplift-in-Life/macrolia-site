@@ -4,7 +4,7 @@
 Inputs: brand files, Play listing screenshots, app screens in assets/ and the in-app legal texts.
 Run: python3 build.py <play-listing dir> <brand dir> <policy_bg.json>
 """
-import json, os, shutil, sys, html
+import json, os, re, shutil, sys, html
 from PIL import Image
 
 PLAY, BRAND, POLICY = sys.argv[1:4]
@@ -17,6 +17,17 @@ LANGS = {
     "en": {"dir": "", "locale": "en-US", "name": "English"},
     "bg": {"dir": "bg/", "locale": "bg", "name": "Български"},
     "de": {"dir": "de/", "locale": "de-DE", "name": "Deutsch"},
+    "es": {"dir": "es/", "locale": "es-ES", "name": "Español"},
+    "fr": {"dir": "fr/", "locale": "fr-FR", "name": "Français"},
+    "it": {"dir": "it/", "locale": "it-IT", "name": "Italiano"},
+    "pl": {"dir": "pl/", "locale": "pl-PL", "name": "Polski"},
+    "nl": {"dir": "nl/", "locale": "nl-NL", "name": "Nederlands"},
+    "ro": {"dir": "ro/", "locale": "ro", "name": "Română"},
+    "el": {"dir": "el/", "locale": "el-GR", "name": "Ελληνικά"},
+    "ru": {"dir": "ru/", "locale": "ru-RU", "name": "Русский"},
+    "uk": {"dir": "uk/", "locale": "uk", "name": "Українська"},
+    "tr": {"dir": "tr/", "locale": "en-US", "name": "Türkçe"},   # no Play listing yet: English share image
+    "sr": {"dir": "sr/", "locale": "en-US", "name": "Srpski"},
 }
 
 T = {
@@ -175,6 +186,13 @@ N = {
     ),
 }
 
+from texts_i18n import TX, NX, KEYS
+for _l, _t in TX.items():
+    T[_l] = _t
+for _l, _n in NX.items():
+    _n["feats"] = [(k,) + f for k, f in zip(KEYS, _n["feats"])]
+    N[_l] = _n
+
 CSS = """
 /* A calm green field: one big statement, then the app shown screen by screen, alternating sides. */
 :root{--bg:#f6f8f4;--paper:#fff;--ink:#17251f;--mut:#56665d;--line:#dfe6df;--brand:#1f5c43;--ac:#2e7d5b;--tint:#e6f2e8;--deep:#163f30;--onDeep:#eef6f0;--onDeepAc:#9fe2bd;--approx:#e07b18;--p:#e05a6b;--c:#d4911f;--f:#3d8fd6;--salt:#7d8b85;
@@ -196,7 +214,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
 details.lang{position:relative}
 details.lang summary{list-style:none;cursor:pointer;font-size:14px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--paper)}
 details.lang summary::-webkit-details-marker{display:none}
-details.lang div{position:absolute;right:0;top:calc(100% + 6px);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:6px;display:grid;min-width:170px;z-index:5;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+details.lang div{position:absolute;right:0;top:calc(100% + 6px);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:6px;display:grid;grid-template-columns:1fr 1fr;width:max-content;max-width:calc(100vw - 36px);z-index:5;box-shadow:0 10px 30px rgba(0,0,0,.12)}
 details.lang a{padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:15px}
 details.lang a[aria-current]{color:var(--ac);font-weight:700}
 details.lang a:hover{background:var(--tint)}
@@ -491,7 +509,8 @@ def main():
             write(c["dir"] + kind + "/index.html", legal(lang, kind, policy))
     write("style.css", CSS.strip() + "\n")
     t = T["en"]
-    write("404.html", page("en", 0, "Macrolia", t["desc"], header("en", 0) + f'<main><h1>404</h1><p>{t["nf"]}</p><p><a href="/">{t["back"]}</a></p></main>', "").replace('href="img', 'href="/img').replace('href="style', 'href="/style').replace('src="img', 'src="/img').replace('href="bg/', 'href="/bg/').replace('href="de/', 'href="/de/'))
+    nf = page("en", 0, "Macrolia", t["desc"], header("en", 0) + f'<main><h1>404</h1><p>{t["nf"]}</p><p><a href="/">{t["back"]}</a></p></main>', "").replace('href="img', 'href="/img').replace('href="style', 'href="/style').replace('src="img', 'src="/img')
+    write("404.html", re.sub(r'href="([a-z]{2})/', r'href="/\1/', nf))
     write("CNAME", "macrolia.app\n")
     write(".nojekyll", "")
     write("robots.txt", "User-agent: *\nAllow: /\n")

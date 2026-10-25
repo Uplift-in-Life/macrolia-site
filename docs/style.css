@@ -18,7 +18,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
 details.lang{position:relative}
 details.lang summary{list-style:none;cursor:pointer;font-size:14px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--paper)}
 details.lang summary::-webkit-details-marker{display:none}
-details.lang div{position:absolute;right:0;top:calc(100% + 6px);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:6px;display:grid;min-width:170px;z-index:5;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+details.lang div{position:absolute;right:0;top:calc(100% + 6px);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:6px;display:grid;grid-template-columns:1fr 1fr;width:max-content;max-width:calc(100vw - 36px);z-index:5;box-shadow:0 10px 30px rgba(0,0,0,.12)}
 details.lang a{padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:15px}
 details.lang a[aria-current]{color:var(--ac);font-weight:700}
 details.lang a:hover{background:var(--tint)}
