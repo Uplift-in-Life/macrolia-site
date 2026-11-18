@@ -26,8 +26,8 @@ LANGS = {
     "el": {"dir": "el/", "locale": "el-GR", "name": "Ελληνικά"},
     "ru": {"dir": "ru/", "locale": "ru-RU", "name": "Русский"},
     "uk": {"dir": "uk/", "locale": "uk", "name": "Українська"},
-    "tr": {"dir": "tr/", "locale": "en-US", "name": "Türkçe"},   # no Play listing yet: English share image
-    "sr": {"dir": "sr/", "locale": "en-US", "name": "Srpski"},
+    "tr": {"dir": "tr/", "locale": "tr-TR", "name": "Türkçe"},
+    "sr": {"dir": "sr/", "locale": "sr", "name": "Srpski"},
 }
 
 T = {
