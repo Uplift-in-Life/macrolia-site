@@ -11,7 +11,7 @@ PLAY, BRAND, POLICY = sys.argv[1:4]
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "docs")
 ASSETS = os.path.join(ROOT, "assets")
-EMAIL = "support@macrolia.app"
+EMAIL = "support@upliftinlife.com"
 
 LANGS = {
     "en": {"dir": "", "locale": "en-US", "name": "English"},
