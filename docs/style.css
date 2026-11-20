@@ -94,7 +94,7 @@ footer p{margin:0 0 10px;max-width:48em;font-size:14px}
 .h2{margin:56px 0 18px}
 .small{font-size:15px;color:var(--mut)}
 .legal{max-width:760px}
-.legal .note{background:var(--tint);border-radius:12px;padding:12px 16px;font-size:15px}
+.legal h1{font-size:clamp(26px,6.4vw,38px);line-height:1.15;hyphens:auto;overflow-wrap:break-word;margin:8px 0 16px}
 .legal ul{color:var(--mut)}
 @media (max-width:760px){
 .hero,.feat,.vid,.story,.two,.hero1{grid-template-columns:1fr}

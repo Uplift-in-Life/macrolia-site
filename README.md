@@ -4,9 +4,9 @@ Static website for the Macrolia app, served by GitHub Pages from `docs/` on `mai
 
 Rebuild after changing texts or images (needs Python 3 + Pillow):
 
-    python3 build.py <play-listing dir> <brand dir> data/policy_bg.json
+    python3 build.py <play-listing dir> <brand dir> data
 
-`data/policy_bg.json` is the `policy` object from the app's `bg.json` strings (Privacy Policy and Terms of Use).
+`data/policy_<lang>.json` is the `policy` object from the app's `strings/<lang>.json` (Privacy Policy and Terms of Use), one file per language, so every language shows its own legal texts.
 
 The home page (Bulgarian in `N` in build.py, the other 13 languages in `texts_i18n.py`) uses app screens from `assets/shots/<lang>/`,
 rendered with the app's preview (`./gradlew --offline -p preview shots --args=site`, local "site-*"
