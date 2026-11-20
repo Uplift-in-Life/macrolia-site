@@ -2,7 +2,8 @@
 """Builds the static website macrolia.app into ./docs (served by GitHub Pages).
 
 Inputs: brand files, Play listing screenshots, app screens in assets/ and the in-app legal texts.
-Run: python3 build.py <play-listing dir> <brand dir> <policy_bg.json>
+Run: python3 build.py <play-listing dir> <brand dir> data
+(data/policy_<lang>.json = the `policy` object of the app's strings/<lang>.json)
 """
 import json, os, re, shutil, sys, html
 from PIL import Image
@@ -54,7 +55,6 @@ T = {
         langs="Available in 14 languages, with a light and a dark theme.",
         disclaimer="Macrolia is not a medical device. If you are over 65, pregnant, have a medical condition or take medication, talk to your doctor before changing your diet.",
         privacy="Privacy Policy", terms="Terms of Use",
-        legal_note="This text is currently available in Bulgarian, the original language of the app. Translations will follow.",
         back="Back to home",
         nf="Page not found.",
     ),
@@ -81,7 +81,6 @@ T = {
         langs="На 12 езика, със светла и тъмна тема.",
         disclaimer="Macrolia не е медицинско изделие. Ако сте над 65 години, бременна, имате заболяване или приемате лекарства, консултирайте се с лекар, преди да промените храненето си.",
         privacy="Политика за поверителност", terms="Условия за ползване",
-        legal_note="",
         back="Към началната страница",
         nf="Страницата не е намерена.",
     ),
@@ -108,7 +107,6 @@ T = {
         langs="In 14 Sprachen, mit hellem und dunklem Design.",
         disclaimer="Macrolia ist kein Medizinprodukt. Wenn Sie über 65, schwanger oder krank sind oder Medikamente nehmen, sprechen Sie mit Ihrer Ärztin oder Ihrem Arzt, bevor Sie Ihre Ernährung umstellen.",
         privacy="Datenschutzerklärung", terms="Nutzungsbedingungen",
-        legal_note="Dieser Text ist derzeit auf Bulgarisch verfügbar, der Originalsprache der App. Übersetzungen folgen.",
         back="Zur Startseite",
         nf="Seite nicht gefunden.",
     ),
@@ -127,7 +125,7 @@ N = {
         h1a="Не още една диета.", h1b="Твоята система за цял живот.",
         lead="Macrolia смята калориите и макросите точно от етикета на продукта, който държите в ръка. Въвеждате го веднъж и всеки ден, всяка рецепта и всяка порция са верни години напред.",
         how_btn="Вижте как работи", video_btn="Гледайте видеото",
-        label=dict(t="Хранителна стойност на 100 г", rows=[("Енергия", "61 kcal"), ("Мазнини", "2 г"), ("Въглехидрати", "4,7 г"), ("Белтъчини", "4 г"), ("Сол", "0,1 г")],
+        label=dict(t="Хранителна стойност на 100 г", rows=[("Енергия", "53 kcal"), ("Мазнини", "2 г"), ("Въглехидрати", "4,7 г"), ("Белтъчини", "4 г"), ("Сол", "0,1 г")],
                    note="Кисело мляко 2%: от етикета направо в приложението"),
         hero_alt="Дневният калкулатор в Macrolia",
         why="Защо Macrolia",
@@ -136,8 +134,8 @@ N = {
         how="Как работи",
         how_h="Всичко, от което имате нужда, без излишни неща",
         feats=[
-            ("label", "Продукти", "Точно от етикета, не от чужди бази",
-             "Преписвате стойностите на 100 г от опаковката или просто снимате етикета. Числата съвпадат с това, което реално ядете.",
+            ("label", "Продукти", "Точно от етикета на Вашия продукт",
+             "Преписвате стойностите на 100 г от опаковката или просто снимате етикета. Числата съвпадат с това, което реално ядете. Основните храни без етикет са с официални стойности (USDA, швейцарската и германската база данни), с източник при всяка.",
              "📷 AI снимка на етикета попълва полетата вместо Вас"),
             ("rec", "Рецепти", "Вашата електронна готварска книга",
              "Рецептите от тетрадката на баба, от книгите на рафта и от любимите групи, на едно място. Въвеждате ги веднъж и ги ползвате винаги.", ""),
@@ -145,16 +143,18 @@ N = {
              "Претегляте готовото ястие заедно със съда. Macrolia изважда съда и смята колко точно сте изяли.", ""),
             ("plan", "План за утре", "Планирате, пазарувате, ядете",
              "Още от днес въвеждате какво ще ядете утре. Купувате само нужното, а в полунощ планът става Вашият ден.", ""),
-            ("mode", "Цел", "Отслабване, задържане или качване",
-             "Когато стигнете целта, минавате на „Задържане“. Ако животът се промени, просто сменяте режима. Дневният лимит е по формулата Mifflin-St Jeor и клиничните препоръки, с безопасно темпо.", ""),
+            ("mode", "Цел", "Отслабване, задържане или напълняване",
+             "Когато стигнете целта, Macrolia минава сама на „Задържане“. Ако животът се промени, просто сменяте режима. Дневният лимит е по формулата Mifflin-St Jeor и клиничните препоръки, с безопасно темпо.", ""),
             ("rest", "Ресторант и кафе", "И навън знаете какво ядете",
-             "Снимате чинията и AI разпознава какво има в нея. Стойността е приблизителна и е отбелязана с ≈. По-добре приблизително, отколкото нищо.", ""),
+             "Снимате чинията и AI разпознава какво има в нея, избирате ястие и порция от списъка или преписвате калориите от менюто. Стойностите на око са отбелязани с ≈. По-добре приблизително, отколкото нищо.", ""),
         ],
         alts=dict(label="Нов продукт със снимка на етикета", rec="Рецепти", cook="Порция от сготвено ястие", plan="План за утре", mode="Смяна на режим", rest="Снимка на ястие с AI"),
         more=[
-            ("Калории от движение", "Чрез Health Connect от телефона, часовник или фитнес приложение. Вие избирате колко да се добавят към лимита."),
+            ("Калории от движение", "Автоматично отчитане през Health Connect (от телефона, часовник или фитнес приложение) или ръчно добавени тренировки. Вие избирате колко от автоматично отчетените калории да се добавят към лимита."),
             ("Тегло, графика, отчет", "Графика на теглото, снимки „преди и след“ само за Вас и отчет в PDF и Excel."),
-            ("Съвети за баланс", "Кратки подсказки, когато протеинът или мазнините са извън целта. Помага, не командва."),
+            ("Съвети за баланс", "Кратки подсказки, когато калориите, протеинът, въглехидратите, мазнините или солта са извън целта. Помага, не командва."),
+            ("Напомняния", "За храната, за плана за утре и за претеглянето. Включвате само тези, които искате."),
+            ("Готова база", "Над 270 основни храни с официални стойности и над 100 рецепти, които можете да променяте."),
         ],
         who="За кого е",
         who_h="За всяка, която иска да остане в режим",
@@ -172,7 +172,7 @@ N = {
         story_p="Macrolia започна като една Excel таблица. С нея създателката на приложението свали 25 кг за 7 месеца и задържа резултата. Таблицата стана приложение, за да може същата система да помогне и на други.",
         story_disc="Резултатите са различни при всеки човек.",
         data_h="Вашите данни са само Ваши",
-        data="Всичко остава на телефона Ви. Без регистрация, без реклами и проследяване. Снимката за AI анализ се изпраща само за изчислението и не се пази.",
+        data="Всичко остава на телефона Ви. Без регистрация, без реклами и проследяване. Снимката за AI анализ се изпраща само за изчислението и не се пази. Можете да запазите резервно копие и да пренесете данните си на нов телефон.",
         sub_h="Абонамент",
         sub="Месечен или годишен абонамент, и двата със 7 дни безплатно. Отказвате по всяко време в Google Play.",
         langs="На 14 езика, със светла и тъмна тема.",
@@ -180,7 +180,7 @@ N = {
         faq=[
             ("Кога излиза приложението?", "Подготвяме пускането в Google Play. Пишете ни и ще Ви кажем, когато е готово."),
             ("Има ли версия за iPhone?", "Засега само за Android."),
-            ("Защо няма скенер за баркод?", "Базите с баркодове се попълват от потребители и често са грешни или остарели. В Macrolia всяка стойност идва от етикета, затова числата са точни."),
+            ("Защо няма скенер за баркод?", "Базите с баркодове се попълват от потребители и често са грешни или остарели. В Macrolia въвеждате етикета на Вашия продукт веднъж, а основните храни без етикет са с официални стойности. Затова числата са точни."),
             ("Колко AI снимки мога да направя?", "100 AI снимки на месец: 70 за етикети и 30 за ястия."),
         ],
     ),
@@ -290,7 +290,7 @@ footer p{margin:0 0 10px;max-width:48em;font-size:14px}
 .h2{margin:56px 0 18px}
 .small{font-size:15px;color:var(--mut)}
 .legal{max-width:760px}
-.legal .note{background:var(--tint);border-radius:12px;padding:12px 16px;font-size:15px}
+.legal h1{font-size:clamp(26px,6.4vw,38px);line-height:1.15;hyphens:auto;overflow-wrap:break-word;margin:8px 0 16px}
 .legal ul{color:var(--mut)}
 @media (max-width:760px){
 .hero,.feat,.vid,.story,.two,.hero1{grid-template-columns:1fr}
@@ -449,25 +449,42 @@ def home(lang):
     return page(lang, depth, t["title"], t["desc"], body, LANGS[lang]["dir"])
 
 
+# Until the company is registered (January 2027), the site names the brand in place of the
+# company placeholders of the app's legal texts, and leaves out the sentence pointing to an Impressum.
+LEGAL_WHO = {
+    "bg": "Macrolia (Uplift in Life), Виена, Австрия; пълните данни на фирмата ще бъдат добавени след регистрацията ѝ",
+    "en": "Macrolia (Uplift in Life), Vienna, Austria; the company's full details will be added once it is registered",
+    "de": "Macrolia (Uplift in Life), Wien, Österreich; die vollständigen Firmendaten werden nach der Eintragung ergänzt",
+    "es": "Macrolia (Uplift in Life), Viena, Austria; los datos completos de la empresa se añadirán tras su registro",
+    "fr": "Macrolia (Uplift in Life), Vienne, Autriche ; les coordonnées complètes de la société seront ajoutées après son immatriculation",
+    "it": "Macrolia (Uplift in Life), Vienna, Austria; i dati completi dell'azienda saranno aggiunti dopo la registrazione",
+    "pl": "Macrolia (Uplift in Life), Wiedeń, Austria; pełne dane firmy zostaną dodane po jej rejestracji",
+    "nl": "Macrolia (Uplift in Life), Wenen, Oostenrijk; de volledige bedrijfsgegevens worden na de registratie toegevoegd",
+    "ro": "Macrolia (Uplift in Life), Viena, Austria; datele complete ale companiei vor fi adăugate după înregistrarea acesteia",
+    "el": "Macrolia (Uplift in Life), Βιέννη, Αυστρία· τα πλήρη στοιχεία της εταιρείας θα προστεθούν μετά την καταχώρισή της",
+    "ru": "Macrolia (Uplift in Life), Вена, Австрия; полные данные компании будут добавлены после её регистрации",
+    "uk": "Macrolia (Uplift in Life), Відень, Австрія; повні дані компанії буде додано після її реєстрації",
+    "tr": "Macrolia (Uplift in Life), Viyana, Avusturya (şirket bilgilerinin tamamı tescilden sonra eklenecektir)",
+    "sr": "Macrolia (Uplift in Life), Beč, Austrija; potpuni podaci firme biće dodati nakon njene registracije",
+}
+
+
 def legal(lang, kind, policy):
     t = T[lang]
     depth = 2 if LANGS[lang]["dir"] else 1
     up = "../" * depth
     b = policy[kind]["body"]
-    # Placeholders stay in the app until the company exists; the public site names only the brand.
-    who = "Macrolia (Uplift in Life), Виена, Австрия; пълните данни на фирмата ще бъдат добавени след регистрацията ѝ"
-    b = b.replace("[Име на фирмата], [адрес], Австрия, [фирмен номер]", who)
-    b = b.replace("[Име на фирмата], [адрес], Австрия", who)
-    # The site has no Impressum until the company is registered (January 2027)
-    b = b.replace(" Пълните данни за нас са в Impressum на macrolia.app.", "")
-    assert "[" not in b, "placeholder left in legal text"
-    title_bg = policy[kind]["title"]
-    note = f'<p class="note" lang="{lang}">{t["legal_note"]}</p>' if t["legal_note"] else ""
+    # "[Company name], [address], Austria[, [register number]]" in every language
+    b, n = re.subn(r"\[[^\]]+\], \[[^\]]+\], ([^,\[]+?)(, \[[^\]]+\])?(?=,)", LEGAL_WHO[lang], b)
+    assert n == 1, (lang, kind, "company placeholder")
+    if kind == "terms":
+        b, n = re.subn(r"(?<=\.) [^<.]*(?:\.app)?[^<.]*Impressum[^<]*?(?=</p>)", "", b)
+        assert n == 1, (lang, "Impressum sentence")
+    assert "[" not in b and "Impressum" not in b, (lang, kind, "placeholder left in legal text")
     body = f"""{header(lang, depth, kind + '/')}
 <main class="legal">
-{note}
-<h1 lang="bg">{title_bg}</h1>
-<div lang="bg">{b}</div>
+<h1>{policy[kind]["title"]}</h1>
+<div>{b}</div>
 <p><a href="{up}{LANGS[lang]['dir']}">{t['back']}</a></p>
 </main>"""
     name = t["privacy"] if kind == "privacy" else t["terms"]
@@ -484,7 +501,6 @@ def write(rel, text):
 def main():
     shutil.rmtree(OUT, ignore_errors=True)
     os.makedirs(os.path.join(OUT, "img"))
-    policy = json.load(open(POLICY, encoding="utf-8"))
     icon = Image.open(os.path.join(BRAND, "macrolia-icon-play-512.png")).convert("RGBA")
     icon.save(os.path.join(OUT, "img/icon-512.png"), optimize=True)
     icon.resize((192, 192), Image.LANCZOS).save(os.path.join(OUT, "img/icon-192.png"), optimize=True)
@@ -508,6 +524,7 @@ def main():
                 im.resize((540, 960), Image.LANCZOS).save(os.path.join(OUT, f"img/{lang}/{n}.webp"), quality=82)
             write(c["dir"] + "index.html", home(lang))
         Image.open(os.path.join(src, "featureGraphic.png")).convert("RGB").save(os.path.join(OUT, f"img/og-{lang}.png"), optimize=True)
+        policy = json.load(open(os.path.join(POLICY, f"policy_{lang}.json"), encoding="utf-8"))
         for kind in ("privacy", "terms"):
             write(c["dir"] + kind + "/index.html", legal(lang, kind, policy))
     write("style.css", CSS.strip() + "\n")
