@@ -26,8 +26,8 @@ LANGS = {
     "el": {"dir": "el/", "locale": "el-GR", "name": "Ελληνικά"},
     "ru": {"dir": "ru/", "locale": "ru-RU", "name": "Русский"},
     "uk": {"dir": "uk/", "locale": "uk", "name": "Українська"},
-    "tr": {"dir": "tr/", "locale": "en-US", "name": "Türkçe"},   # no Play listing yet: English share image
-    "sr": {"dir": "sr/", "locale": "en-US", "name": "Srpski"},
+    "tr": {"dir": "tr/", "locale": "tr-TR", "name": "Türkçe"},
+    "sr": {"dir": "sr/", "locale": "sr", "name": "Srpski"},
 }
 
 T = {
@@ -179,9 +179,9 @@ N = {
         faq_h="Въпроси",
         faq=[
             ("Кога излиза приложението?", "Подготвяме пускането в Google Play. Пишете ни и ще Ви кажем, когато е готово."),
-            ("Има ли версия за iPhone?", "Засега само за Android. Версия за iPhone планираме след това."),
+            ("Има ли версия за iPhone?", "Засега само за Android."),
             ("Защо няма скенер за баркод?", "Базите с баркодове се попълват от потребители и често са грешни или остарели. В Macrolia всяка стойност идва от етикета, затова числата са точни."),
-            ("Колко AI снимки мога да направя?", "До 100 снимки на месец, общо за етикети и ястия."),
+            ("Колко AI снимки мога да направя?", "100 AI снимки на месец: 70 за етикети и 30 за ястия."),
         ],
     ),
 }
@@ -455,8 +455,11 @@ def legal(lang, kind, policy):
     up = "../" * depth
     b = policy[kind]["body"]
     # Placeholders stay in the app until the company exists; the public site names only the brand.
-    b = b.replace("[Име на фирмата], [адрес на управление]",
-                  "Macrolia (Uplift in Life), Виена, Австрия; пълните данни на фирмата ще бъдат добавени след регистрацията ѝ")
+    who = "Macrolia (Uplift in Life), Виена, Австрия; пълните данни на фирмата ще бъдат добавени след регистрацията ѝ"
+    b = b.replace("[Име на фирмата], [адрес], Австрия, [фирмен номер]", who)
+    b = b.replace("[Име на фирмата], [адрес], Австрия", who)
+    # The site has no Impressum until the company is registered (January 2027)
+    b = b.replace(" Пълните данни за нас са в Impressum на macrolia.app.", "")
     assert "[" not in b, "placeholder left in legal text"
     title_bg = policy[kind]["title"]
     note = f'<p class="note" lang="{lang}">{t["legal_note"]}</p>' if t["legal_note"] else ""

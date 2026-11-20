@@ -100,9 +100,9 @@ NX = {
         faq_h="Questions",
         faq=[
             ("When is the app coming out?", "We are preparing the launch on Google Play. Write to us and we'll let you know when it's ready."),
-            ("Is there an iPhone version?", "For now it's Android only. An iPhone version is planned for later."),
+            ("Is there an iPhone version?", "For now it's Android only."),
             ("Why is there no barcode scanner?", "Barcode databases are filled in by users and are often wrong or out of date. In Macrolia every value comes from the label, so the numbers are accurate."),
-            ("How many AI photos can I take?", "Up to 100 photos a month, for labels and meals together."),
+            ("How many AI photos can I take?", "100 AI photos a month: 70 for labels and 30 for meals."),
         ],
     ),
     "de": dict(
@@ -150,9 +150,9 @@ NX = {
         faq_h="Fragen",
         faq=[
             ("Wann erscheint die App?", "Wir bereiten den Start bei Google Play vor. Schreiben Sie uns, und wir sagen Ihnen Bescheid, wenn es so weit ist."),
-            ("Gibt es eine iPhone-Version?", "Vorerst nur für Android. Eine iPhone-Version ist für später geplant."),
+            ("Gibt es eine iPhone-Version?", "Vorerst nur für Android."),
             ("Warum gibt es keinen Barcode-Scanner?", "Barcode-Datenbanken werden von Nutzern befüllt und sind oft falsch oder veraltet. In Macrolia stammt jeder Wert vom Etikett, deshalb stimmen die Zahlen."),
-            ("Wie viele KI-Fotos kann ich machen?", "Bis zu 100 Fotos im Monat, für Etiketten und Gerichte zusammen."),
+            ("Wie viele KI-Fotos kann ich machen?", "100 KI-Fotos im Monat: 70 für Etiketten und 30 für Gerichte."),
         ],
     ),
 }
@@ -203,9 +203,9 @@ NX.update({
         faq_h="Preguntas",
         faq=[
             ("¿Cuándo sale la app?", "Estamos preparando el lanzamiento en Google Play. Escríbenos y te avisaremos cuando esté lista."),
-            ("¿Hay versión para iPhone?", "Por ahora solo para Android. La versión para iPhone está prevista más adelante."),
+            ("¿Hay versión para iPhone?", "Por ahora solo para Android."),
             ("¿Por qué no hay escáner de código de barras?", "Las bases de códigos de barras las rellenan los usuarios y a menudo tienen errores o están desactualizadas. En Macrolia cada valor viene de la etiqueta, por eso los números son exactos."),
-            ("¿Cuántas fotos con IA puedo hacer?", "Hasta 100 fotos al mes, entre etiquetas y platos."),
+            ("¿Cuántas fotos con IA puedo hacer?", "100 fotos con IA al mes: 70 para etiquetas y 30 para platos."),
         ],
     ),
     "fr": dict(
@@ -253,9 +253,9 @@ NX.update({
         faq_h="Questions",
         faq=[
             ("Quand l'app sortira-t-elle ?", "Nous préparons le lancement sur Google Play. Écrivez-nous et nous vous préviendrons dès qu'elle sera prête."),
-            ("Existe-t-il une version iPhone ?", "Pour l'instant, uniquement sur Android. Une version iPhone est prévue plus tard."),
+            ("Existe-t-il une version iPhone ?", "Pour l'instant, uniquement sur Android."),
             ("Pourquoi n'y a-t-il pas de lecteur de code-barres ?", "Les bases de codes-barres sont remplies par les utilisateurs et souvent fausses ou périmées. Dans Macrolia, chaque valeur vient de l'étiquette, donc les chiffres sont exacts."),
-            ("Combien de photos IA puis-je prendre ?", "Jusqu'à 100 photos par mois, étiquettes et plats confondus."),
+            ("Combien de photos IA puis-je prendre ?", "100 photos IA par mois : 70 pour les étiquettes et 30 pour les plats."),
         ],
     ),
     "it": dict(
@@ -303,9 +303,9 @@ NX.update({
         faq_h="Domande",
         faq=[
             ("Quando esce l'app?", "Stiamo preparando il lancio su Google Play. Scrivici e ti avviseremo quando sarà pronta."),
-            ("C'è una versione per iPhone?", "Per ora solo Android. Una versione per iPhone è prevista in seguito."),
+            ("C'è una versione per iPhone?", "Per ora solo Android."),
             ("Perché non c'è lo scanner di codici a barre?", "I database dei codici a barre sono compilati dagli utenti e spesso sono sbagliati o vecchi. In Macrolia ogni valore viene dall'etichetta, perciò i numeri sono esatti."),
-            ("Quante foto con IA posso fare?", "Fino a 100 foto al mese, tra etichette e piatti."),
+            ("Quante foto con IA posso fare?", "100 foto con IA al mese: 70 per le etichette e 30 per i piatti."),
         ],
     ),
     "pl": dict(
@@ -353,9 +353,9 @@ NX.update({
         faq_h="Pytania",
         faq=[
             ("Kiedy aplikacja będzie dostępna?", "Przygotowujemy premierę w Google Play. Napisz do nas, a damy znać, gdy będzie gotowa."),
-            ("Czy jest wersja na iPhone'a?", "Na razie tylko na Androida. Wersję na iPhone'a planujemy później."),
+            ("Czy jest wersja na iPhone'a?", "Na razie tylko na Androida."),
             ("Dlaczego nie ma skanera kodów kreskowych?", "Bazy kodów kreskowych wypełniają użytkownicy i często są błędne lub nieaktualne. W Macrolii każda wartość pochodzi z etykiety, dlatego liczby są dokładne."),
-            ("Ile zdjęć z AI mogę zrobić?", "Do 100 zdjęć miesięcznie, łącznie dla etykiet i dań."),
+            ("Ile zdjęć z AI mogę zrobić?", "100 zdjęć AI miesięcznie: 70 na etykiety i 30 na dania."),
         ],
     ),
     "nl": dict(
@@ -403,9 +403,9 @@ NX.update({
         faq_h="Vragen",
         faq=[
             ("Wanneer komt de app uit?", "We bereiden de lancering in Google Play voor. Mail ons en we laten het je weten zodra hij klaar is."),
-            ("Is er een iPhone-versie?", "Voorlopig alleen voor Android. Een iPhone-versie staat voor later gepland."),
+            ("Is er een iPhone-versie?", "Voorlopig alleen voor Android."),
             ("Waarom is er geen barcodescanner?", "Barcodedatabases worden door gebruikers gevuld en zijn vaak fout of verouderd. In Macrolia komt elke waarde van het etiket, daarom kloppen de cijfers."),
-            ("Hoeveel AI-foto’s kan ik maken?", "Tot 100 foto’s per maand, voor etiketten en gerechten samen."),
+            ("Hoeveel AI-foto’s kan ik maken?", "100 AI-foto’s per maand: 70 voor etiketten en 30 voor gerechten."),
         ],
     ),
 })
@@ -456,9 +456,9 @@ NX.update({
         faq_h="Întrebări",
         faq=[
             ("Când apare aplicația?", "Pregătim lansarea pe Google Play. Scrie-ne și îți spunem când e gata."),
-            ("Există versiune pentru iPhone?", "Deocamdată doar pentru Android. O versiune pentru iPhone e planificată mai târziu."),
+            ("Există versiune pentru iPhone?", "Deocamdată doar pentru Android."),
             ("De ce nu există scanner de coduri de bare?", "Bazele de coduri de bare sunt completate de utilizatori și sunt des greșite sau vechi. În Macrolia fiecare valoare vine de pe etichetă, de aceea cifrele sunt exacte."),
-            ("Câte fotografii cu AI pot face?", "Până la 100 de fotografii pe lună, pentru etichete și preparate împreună."),
+            ("Câte fotografii cu AI pot face?", "100 de fotografii cu AI pe lună: 70 pentru etichete și 30 pentru preparate."),
         ],
     ),
     "el": dict(
@@ -506,9 +506,9 @@ NX.update({
         faq_h="Ερωτήσεις",
         faq=[
             ("Πότε κυκλοφορεί η εφαρμογή;", "Ετοιμάζουμε την κυκλοφορία στο Google Play. Γράψε μας και θα σε ειδοποιήσουμε όταν είναι έτοιμη."),
-            ("Υπάρχει έκδοση για iPhone;", "Προς το παρόν μόνο για Android. Έκδοση για iPhone σχεδιάζεται αργότερα."),
+            ("Υπάρχει έκδοση για iPhone;", "Προς το παρόν μόνο για Android."),
             ("Γιατί δεν υπάρχει σαρωτής barcode;", "Οι βάσεις barcode συμπληρώνονται από χρήστες και συχνά είναι λάθος ή παλιές. Στο Macrolia κάθε τιμή προέρχεται από την ετικέτα, γι' αυτό οι αριθμοί είναι ακριβείς."),
-            ("Πόσες φωτογραφίες με AI μπορώ να κάνω;", "Έως 100 φωτογραφίες τον μήνα, για ετικέτες και πιάτα μαζί."),
+            ("Πόσες φωτογραφίες με AI μπορώ να κάνω;", "100 φωτογραφίες με AI τον μήνα: 70 για ετικέτες και 30 για πιάτα."),
         ],
     ),
     "ru": dict(
@@ -556,9 +556,9 @@ NX.update({
         faq_h="Вопросы",
         faq=[
             ("Когда выйдет приложение?", "Мы готовим запуск в Google Play. Напишите нам, и мы сообщим, когда всё будет готово."),
-            ("Есть ли версия для iPhone?", "Пока только для Android. Версия для iPhone запланирована позже."),
+            ("Есть ли версия для iPhone?", "Пока только для Android."),
             ("Почему нет сканера штрихкодов?", "Базы штрихкодов заполняют пользователи, и в них часто ошибки или устаревшие данные. В Macrolia каждое значение берётся с этикетки, поэтому цифры точные."),
-            ("Сколько фото с ИИ можно сделать?", "До 100 фото в месяц, для этикеток и блюд вместе."),
+            ("Сколько фото с ИИ можно сделать?", "100 фото с ИИ в месяц: 70 для этикеток и 30 для блюд."),
         ],
     ),
     "uk": dict(
@@ -606,9 +606,9 @@ NX.update({
         faq_h="Запитання",
         faq=[
             ("Коли вийде застосунок?", "Ми готуємо запуск у Google Play. Напишіть нам, і ми повідомимо, коли все буде готово."),
-            ("Чи є версія для iPhone?", "Поки лише для Android. Версію для iPhone заплановано пізніше."),
+            ("Чи є версія для iPhone?", "Поки лише для Android."),
             ("Чому немає сканера штрихкодів?", "Бази штрихкодів заповнюють користувачі, і в них часто помилки або застарілі дані. У Macrolia кожне значення береться з етикетки, тому цифри точні."),
-            ("Скільки фото з ШІ можна зробити?", "До 100 фото на місяць, для етикеток і страв разом."),
+            ("Скільки фото з ШІ можна зробити?", "100 фото з ШІ на місяць: 70 для етикеток і 30 для страв."),
         ],
     ),
     "tr": dict(
@@ -656,9 +656,9 @@ NX.update({
         faq_h="Sorular",
         faq=[
             ("Uygulama ne zaman çıkıyor?", "Google Play'de yayına hazırlanıyoruz. Bize yazın, hazır olduğunda haber verelim."),
-            ("iPhone sürümü var mı?", "Şimdilik yalnızca Android için. iPhone sürümü daha sonra planlanıyor."),
+            ("iPhone sürümü var mı?", "Şimdilik yalnızca Android için."),
             ("Neden barkod tarayıcı yok?", "Barkod veri tabanlarını kullanıcılar doldurur ve sık sık hatalı ya da eskidir. Macrolia'da her değer etiketten gelir, bu yüzden rakamlar doğrudur."),
-            ("Kaç yapay zekâ fotoğrafı çekebilirim?", "Etiket ve yemekler için toplam ayda 100 fotoğrafa kadar."),
+            ("Kaç yapay zekâ fotoğrafı çekebilirim?", "Ayda 100 yapay zekâ fotoğrafı: 70'i etiketler, 30'u yemekler için."),
         ],
     ),
     "sr": dict(
@@ -706,9 +706,9 @@ NX.update({
         faq_h="Pitanja",
         faq=[
             ("Kada izlazi aplikacija?", "Pripremamo objavljivanje na Google Play. Pišite nam i javićemo vam kad bude spremna."),
-            ("Postoji li verzija za iPhone?", "Za sada samo za Android. Verzija za iPhone planirana je kasnije."),
+            ("Postoji li verzija za iPhone?", "Za sada samo za Android."),
             ("Zašto nema skenera bar-koda?", "Baze bar-kodova popunjavaju korisnici i često su netačne ili zastarele. U Macroliji svaka vrednost dolazi sa etikete, zato su brojevi tačni."),
-            ("Koliko AI fotografija mogu da napravim?", "Do 100 fotografija mesečno, ukupno za etikete i jela."),
+            ("Koliko AI fotografija mogu da napravim?", "100 AI fotografija mesečno: 70 za etikete i 30 za jela."),
         ],
     ),
 })
